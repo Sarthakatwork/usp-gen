@@ -1,0 +1,5 @@
+2025-05-22 09:10:18,357 - gemini_usp_app - INFO - Starting validation...
+2025-05-22 09:10:18,357 - gemini_usp_app - INFO - Test directory created at tests
+2025-05-22 09:10:18,357 - gemini_usp_app - ERROR - Missing dependency: No module named 'streamlit'
+2025-05-22 09:10:18,357 - gemini_usp_app - INFO - All required files exist
+2025-05-22 09:10:18,357 - gemini_usp_app - ERROR - Validation failed
