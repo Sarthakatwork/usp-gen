@@ -95,7 +95,6 @@ class GeminiClient:
                 # Clean up the temporary file
                 if temp_file_path and os.path.exists(temp_file_path):
                     os.remove(temp_file_path)
-                    time.sleep(3)
                 
         except Exception as e:
             error_msg = f"Error generating USP from PDF: {str(e)}"
@@ -126,13 +125,14 @@ class GeminiClient:
         try:
             # First API call: Generate USPs from PDF
             usp_result = self.generate_usp_from_pdf(pdf_file, existing_usp)
+            time.sleep(3)
             
             if "error" in usp_result:
                 return usp_result
             
             # Second API call: Convert USPs to 75-character limit
             limited_result = self.convert_usp_to_75_chars(usp_result["original_usp"])
-            
+            time.sleep(3)
             if "error" in limited_result:
                 return limited_result
             
