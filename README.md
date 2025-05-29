@@ -57,7 +57,8 @@ streamlit run app.py
 - Temporary files are automatically cleaned up
 
 
-Changelog Version : 1.1
+## Changelog
+### Version 1.1
 New version reduces the Rate limit error in the output by introducing Imposed ****Rate limit handling**** which will increase the processing time just a little to stay within LLM request limits.
 Version update to tackle the issue caused by multiple request duing bulk processing of brochures.
 
