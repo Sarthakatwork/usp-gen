@@ -55,3 +55,9 @@ streamlit run app.py
 - PDF files are processed directly without text extraction
 - Maximum file size: 50MB
 - Temporary files are automatically cleaned up
+
+
+Changelog Version : 1.1
+New version reduces the Rate limit error in the output by introducing Imposed ****Rate limit handling**** which will increase the processing time just a little to stay within LLM request limits.
+Version update to tackle the issue caused by multiple request duing bulk processing of brochures.
+

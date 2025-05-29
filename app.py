@@ -645,7 +645,7 @@ with tab1:
     # Footer with version info
     st.markdown("""
     <div style="text-align: center; margin-top: 30px; color: #f8f9fa; font-size: 0.9rem; padding: 15px; background-color: #1a1c24; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);">
-        <div style="font-weight: 600; margin-bottom: 5px;">USP Generator v1.0 | Developed for 99 acres</div>
+        <div style="font-weight: 600; margin-bottom: 5px;">USP Generator v1.1 | Developed for 99 acres</div>
     </div>
     """, unsafe_allow_html=True)
 

@@ -95,6 +95,7 @@ class GeminiClient:
                 # Clean up the temporary file
                 if temp_file_path and os.path.exists(temp_file_path):
                     os.remove(temp_file_path)
+                    time.sleep(3)
                 
         except Exception as e:
             error_msg = f"Error generating USP from PDF: {str(e)}"
@@ -114,6 +115,7 @@ class GeminiClient:
             
             logger.info("Successfully converted USPs to 75-character limit")
             return {"char_limited_usp": result}
+            time.sleept(3)
         except Exception as e:
             error_msg = f"Error converting USPs to 75-character limit: {str(e)}"
             logger.error(error_msg)
