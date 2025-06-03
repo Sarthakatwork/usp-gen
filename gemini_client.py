@@ -16,7 +16,7 @@ class GeminiClient:
     def __init__(self, api_key=None):
         """Initialize the Gemini client with API key."""
         # Use hardcoded API key as requested
-        self.api_key = "AIzaSyB7FYoAqAbB3nRj1ceGvneHDpmR0uNXRyw"
+        self.api_key = "AIzaSyAIz4FhtDSXsaSzBG1ie3G1u-9_stqNM8w"
         self.client = genai.Client(api_key=self.api_key)
         self.model_id = "gemini-2.0-flash"
         logger.info("Gemini client initialized successfully")
