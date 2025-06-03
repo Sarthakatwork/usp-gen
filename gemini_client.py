@@ -74,6 +74,7 @@ Focus on the following aspects, aligning with the expectations of a premium home
 • "RERA registered"  
 • Generic mentions of water, security, or power backup  
 • Statements like "modern lifestyle", "perfect home", etc. without factual support
+• Do not prefix USPs with Project Name, make them standalone and self contained.
 
 # Focus MORE on:
 • Rare or luxury amenities (e.g., golf course, rooftop pool, private theatre, wellness spa, curated landscaping, etc.)  
