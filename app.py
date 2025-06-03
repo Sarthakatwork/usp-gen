@@ -434,23 +434,23 @@ with tab1:
             st.info("Please try again with a different PDF file.")
     
     # Display results with optimized UI - only showing 75-character USPs
-    if st.session_state.gemini_response and "char_limited_usp" in st.session_state.gemini_response:
+    if st.session_state.gemini_response and "original_usp" in st.session_state.gemini_response:
         st.markdown('<div class="card">', unsafe_allow_html=True)
         st.markdown('<h2 class="sub-header">Generated USPs</h2>', unsafe_allow_html=True)
         
         # Display only the 75-character USPs
-        st.text_area("", st.session_state.gemini_response["char_limited_usp"], height=250, key="limited_usp_display")
+        st.text_area("", st.session_state.gemini_response["original_usp"], height=250, key="limited_usp_display")
         
         # Add copy button for convenience
         if st.button("Copy USPs", key="copy_limited"):
-            st.code(st.session_state.gemini_response["char_limited_usp"], language="text")
+            st.code(st.session_state.gemini_response["original_usp"], language="text")
             st.success("USPs copied to clipboard!")
         
         # Create DataFrame for download with optimized memory usage
         output_data = {
             "XID": [xid],
             "EXISTING_USP": [existing_usp],
-            "USP": [st.session_state.gemini_response["char_limited_usp"]]
+            "USP": [st.session_state.gemini_response["original_usp"]]
         }
         output_df = pd.DataFrame(output_data)
         
@@ -578,7 +578,7 @@ with tab1:
                                         results_df = pd.concat([results_df, pd.DataFrame({
                                             "XID": [row.XID],
                                             "EXISTING_USP": [existing_usp],
-                                            "USP": [result["char_limited_usp"]],
+                                            "USP": [result["original_usp"]],
                                             "STATUS": ["Success"]
                                         })], ignore_index=True)
                                     else:

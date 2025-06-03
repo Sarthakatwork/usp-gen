@@ -49,30 +49,45 @@ class GeminiClient:
         try:
             # Create the system prompt exactly as specified
             SYSTEM_PROMPT = f"""
-            You are provided with the raw OCR text extracted from a brochure for a premium residential project. Your task is to extract the unique selling propositions (USPs) that will positively influence potential buyer decisions, keeping in mind the expectations of buyers in this segment.
-            Focus on the following aspects, aligning with the expectations of a premium homebuyer:
-            •	Thematic and Architectural Uniqueness
-            •	Facilities and Luxury Amenities
-            •	Technology and Security Features 
-            •	Landscape and Environment 
-            •	Location Highlights 
-            •	Awards and Recognition
-            •	Any Other Unique Features that enhance lifestyle, convenience, and security.
-            NOTE:
-            •	Keep in mind that the OCR text may contain noise, so filter out any irrelevant content.
-            •	Output the USPs as bullet points, ensuring each bullet point is 20 words or less.
-            •	Ensure each point provides factual details about the project based on the information available in the brochure.
-            •	*Important : If and only if the proper name of an architect, designer, builder, consultant, or developer is explicitly mentioned in the brochure, include it in the USPs, Do not use common nouns such as designers or architect without the presence of a proper noun*
-            •	Arrange them in descending order, with the most unique and attractive USP at the top.
-            •	Give priority to factual details explicitly mentioned in the text, such as the size of the clubhouse, project density, and greenery.
-            •	Use a professional tone in your bullet points.
-            •	Do not include headers in the bullet points.
-            •	Ensure grammatical correctness and capitalize the first letters of proper nouns.
-            •	Focus on: (factual information, lifestyle appeal, and renowned names associated with the project).
-            •	Include unique points and factual information from the following reference points given to you.
-            Reference Points:
-            {existing_usp}
-            """
+You are provided with the attached brochure for a premium residential project. Your task is to extract the unique
+selling propositions (USPs) that will positively influence potential buyer decisions, keeping in mind the expectations of buyers in this segment.
+
+Focus on the following aspects, aligning with the expectations of a premium homebuyer:
+• Thematic and Architectural Uniqueness  
+• Facilities and Luxury Amenities (give special attention to rare or distinctive offerings)  
+• Technology and Security Features  
+• Landscape and Environment  
+• Location Highlights  
+• Awards and Recognition  
+• Any Other Unique Features that enhance lifestyle, convenience, and security
+
+# Output Rules:
+- Output the USPs as bullet points (•), each with 20 words or fewer.
+- Each bullet must be unique — do **not repeat or paraphrase** the same feature across multiple bullets.
+- If multiple facts refer to the same feature (e.g., clubhouse size and facilities), **combine them into one single, strong bullet point**.
+- Do not include section headers (like “Location” or “Amenities”) — only clean bullet points.
+- Use a crisp, professional tone.
+- Do not exceed 8–10 bullet points in total.
+
+# Do NOT include generic or basic information such as:
+• BHK availability  
+• "RERA registered"  
+• Generic mentions of water, security, or power backup  
+• Statements like "modern lifestyle", "perfect home", etc. without factual support
+
+# Focus MORE on:
+• Rare or luxury amenities (e.g., golf course, rooftop pool, private theatre, wellness spa, curated landscaping, etc.)  
+• Concrete factual highlights (e.g., 50,000 sq. ft. clubhouse, 80% open space, 1.5-acre sky park)  
+• Known celebrity architects, design firms, or international partnerships  
+• Location benefits with names (e.g., "close to Airport Terminal 3", not "prime location")
+
+# ADDITIONAL DATA SOURCE:
+You may also use key points from the following reference input to enrich the USPs:
+Reference Points:  
+{existing_usp}
+"""
+
+
             
             temp_file_path = None
             try:
@@ -125,21 +140,21 @@ class GeminiClient:
         try:
             # First API call: Generate USPs from PDF
             usp_result = self.generate_usp_from_pdf(pdf_file, existing_usp)
-            time.sleep(3)
+            time.sleep(2)
             
             if "error" in usp_result:
                 return usp_result
             
             # Second API call: Convert USPs to 75-character limit
-            limited_result = self.convert_usp_to_75_chars(usp_result["original_usp"])
-            time.sleep(3)
-            if "error" in limited_result:
-                return limited_result
+            # limited_result = self.convert_usp_to_75_chars(usp_result["original_usp"])
+            # time.sleep(2)
+            # if "error" in limited_result:
+            #     return limited_result
             
             # Return both results for display
             return {
                 "original_usp": usp_result["original_usp"],
-                "char_limited_usp": limited_result["char_limited_usp"]
+                #"char_limited_usp": limited_result["char_limited_usp"]
             }
         except Exception as e:
             error_msg = f"Error in USP processing pipeline: {str(e)}"
