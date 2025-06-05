@@ -18,7 +18,7 @@ class GeminiClient:
         # Use hardcoded API key as requested
         self.api_key = "AIzaSyAIz4FhtDSXsaSzBG1ie3G1u-9_stqNM8w"
         self.client = genai.Client(api_key=self.api_key)
-        self.model_id = "gemini-2.0-flash"
+        self.model_id = "gemini-2.5-flash-preview-05-20"
         logger.info("Gemini client initialized successfully")
     
     def call_gemini_api(self, SYSTEM_PROMPT, file_content):
@@ -130,7 +130,6 @@ Reference Points:
             
             logger.info("Successfully converted USPs to 75-character limit")
             return {"char_limited_usp": result}
-            time.sleept(3)
         except Exception as e:
             error_msg = f"Error converting USPs to 75-character limit: {str(e)}"
             logger.error(error_msg)
@@ -141,21 +140,20 @@ Reference Points:
         try:
             # First API call: Generate USPs from PDF
             usp_result = self.generate_usp_from_pdf(pdf_file, existing_usp)
-            time.sleep(2)
             
             if "error" in usp_result:
                 return usp_result
             
             # Second API call: Convert USPs to 75-character limit
-            # limited_result = self.convert_usp_to_75_chars(usp_result["original_usp"])
-            # time.sleep(2)
-            # if "error" in limited_result:
-            #     return limited_result
+            limited_result = self.convert_usp_to_75_chars(usp_result["original_usp"])
+            time.sleep(2)
+            if "error" in limited_result:
+                return limited_result
             
             # Return both results for display
             return {
                 "original_usp": usp_result["original_usp"],
-                #"char_limited_usp": limited_result["char_limited_usp"]
+                "char_limited_usp": limited_result["char_limited_usp"]
             }
         except Exception as e:
             error_msg = f"Error in USP processing pipeline: {str(e)}"
