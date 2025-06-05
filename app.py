@@ -382,9 +382,9 @@ with tab1:
         # Add file size validation
         if uploaded_pdf:
             file_size = len(uploaded_pdf.getvalue()) / (1024 * 1024)  # Size in MB
-            # Check against the stated 20MB limit
-            if file_size > 20:
-                st.error(f"File size ({file_size:.2f}MB) exceeds 20MB limit. Please upload a smaller file.")
+            # Check against the stated 100MB limit
+            if file_size > 100:
+                st.error(f"File size ({file_size:.2f}MB) exceeds 100MB limit. Please upload a smaller file.")
                 uploaded_pdf = None # Clear the uploader state by setting the variable to None
             else:
                 st.info(f"File size: {file_size:.2f}MB")
